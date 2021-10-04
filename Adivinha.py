@@ -5,25 +5,38 @@ class ChuteONumero:
         self.valor_aleatorio = 0
         self.valor_minimo = 1
         self.valor_maximo = 100
-        self.tentar_novamente = True
+        self.total_de_tentativas = 0
+
+    def Intro(self):
+        print("        Bem-vindo ao...       ")
+        print("____ JOGO DA ADIVINHAÇÃO! ____")
+        print(" Descubra o número de 0 a 100" )
+
+    def Dificuldade(self):
+        print("          Dificuldades           ")
+        print("(1) Fácil  (2) Médio  (3) Difícil")
+        nivel = int(input("Escolha: "))
+        if (nivel == 1):
+            self.total_de_tentativas = 15
+            print("Começando com calma...")
+        elif (nivel == 2):
+            self.total_de_tentativas = 10
+            print("Equilíbrio é tudo!")
+        else:
+            self.total_de_tentativas = 5
+            print("Ai, ignorante.")
 
     def Iniciar(self):
-        self.GerarNumeroAleatorio()
-        self.PedirValorAleatorio()
-        try:
-            while self.tentar_novamente == True:
-                if int(self.valor_do_chute) > self.valor_aleatorio:
-                    print("Chute um valor mais baixo")
-                    self.PedirValorAleatorio()
-                elif int(self.valor_do_chute) < self.valor_aleatorio:
-                    print("Chute um valor mais cima")
-                    self.PedirValorAleatorio()
-                if int(self.valor_do_chute) == self.valor_aleatorio:
-                    self.tentar_novamente = False
-                    print("PARABÉNS, VOCÊ ACERTOU!")
-        except:
-            print("Favor digitar um número!")
-            self.Iniciar()
+        for rodada in range(1, self.total_de_tentativas + 1):
+            print("Tentativa {} de {}".format(rodada, self.total_de_tentativas))
+            self.PedirValorAleatorio()
+            if int(self.valor_do_chute) > self.valor_aleatorio:
+                print("Um pouco mais pra baixo")
+            elif int(self.valor_do_chute) < self.valor_aleatorio:
+                print("Um pouco mais pra cima")
+            if int(self.valor_do_chute) == self.valor_aleatorio:
+                print("PARABÉNS, VOCÊ ACERTOU!")
+                break
 
 
     def PedirValorAleatorio(self):
@@ -32,5 +45,10 @@ class ChuteONumero:
     def GerarNumeroAleatorio(self):
         self.valor_aleatorio = random.randint(self.valor_minimo, self.valor_maximo)
 
+
+
 chute = ChuteONumero()
+chute.GerarNumeroAleatorio()
+chute.Intro()
+chute.Dificuldade()
 chute.Iniciar()
