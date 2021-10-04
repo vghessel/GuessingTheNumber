@@ -6,6 +6,7 @@ class ChuteONumero:
         self.valor_minimo = 1
         self.valor_maximo = 100
         self.total_de_tentativas = 0
+        self.pontos = 1000
 
     def Intro(self):
         print("        Bem-vindo ao...       ")
@@ -30,14 +31,18 @@ class ChuteONumero:
         for rodada in range(1, self.total_de_tentativas + 1):
             print("Tentativa {} de {}".format(rodada, self.total_de_tentativas))
             self.PedirValorAleatorio()
-            if int(self.valor_do_chute) > self.valor_aleatorio:
-                print("Um pouco mais pra baixo")
-            elif int(self.valor_do_chute) < self.valor_aleatorio:
-                print("Um pouco mais pra cima")
             if int(self.valor_do_chute) == self.valor_aleatorio:
                 print("PARABÉNS, VOCÊ ACERTOU!")
+                print("E fez {} pontos".format(self.pontos))
                 break
+            else:
+                if int(self.valor_do_chute) > self.valor_aleatorio:
+                    print("Um pouco mais pra baixo")
+                elif int(self.valor_do_chute) < self.valor_aleatorio:
+                    print("Um pouco mais pra cima")
 
+                self.pontos_perdidos = abs(self.valor_aleatorio - int(self.valor_do_chute))
+                self.pontos = self.pontos - self.pontos_perdidos
 
     def PedirValorAleatorio(self):
         self.valor_do_chute = input("Chute um número: ")
