@@ -1,3 +1,5 @@
-# Number Guessing Game
+# Guessing The Number
 
-### Code in Golang and Python3 (Object Oriented)
+Simple game with random number generator in CLI to practice language migration (Command Line Interface).
+
+Coded in Golang and Python3 (Object Oriented).
